@@ -11,7 +11,6 @@ RUN pnpm i
 
 COPY . .
 
-# RUN pnpm exec prisma migrate dev
 RUN pnpm exec prisma generate
 RUN pnpm run build
 RUN cp -R ./src/generated ./dist/generated

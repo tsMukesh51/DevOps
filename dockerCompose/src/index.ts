@@ -5,9 +5,10 @@ import { PrismaClient } from "./generated/prisma";
 
 const app = Express();
 const prismaClient = new PrismaClient();
-// app.use(Express.json);
+app.use(Express.json());
 
 app.post("/user", async (req, res) => {
+    console.log(req.body, 'body');
     const userCreated = await prismaClient.user.create({
         data: {
             name: req.body.name,
@@ -29,5 +30,16 @@ app.get("/userslist", async (req, res) => {
     })
 });
 
-app.listen(3000);
-console.log(`listening at port 3000`);
+app.get('/test', (req, res) => {
+    console.log('Test endpoint hit');
+    res.send('Server is running');
+});
+
+app.get('/', (req, res) => {
+    res.send("Root route working");
+});
+
+
+app.listen(3000, '0.0.0.0', () => {
+    console.log(`listening at port 3000`);
+});
