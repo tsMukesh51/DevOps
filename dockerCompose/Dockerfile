@@ -9,10 +9,11 @@ COPY ./pnpm-workspace.yaml ./pnpm-workspace.yaml
 RUN corepack enable pnpm
 RUN pnpm i
 
-COPY . .
-
+COPY ./prisma ./prisma
 RUN pnpm exec prisma generate
+RUN mkdir ./dist && cp -R ./src/generated ./dist/generated
+
+COPY . .
 RUN pnpm run build
-RUN cp -R ./src/generated ./dist/generated
 
 CMD [ "pnpm", "dockerRun" ]
