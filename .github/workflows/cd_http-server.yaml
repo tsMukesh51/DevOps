@@ -11,12 +11,12 @@ jobs:
       - name: Login to DockerHub
         uses: docker/login-action@v3
         with:
-          username: ${{secrets.DOCKERHUB_USERNAME}}
-          password: ${{secrets.DOCKERHUB_TOKEN}}
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
       - name: Build and Push to DockerHub
         uses: docker/build-push-action@v4
         with:
           context: ./dpl-dockr
-          file: ./dockerfile/http-server.dockerfile
+          file: ./dpl-dockr/dockerfile/http-server.dockerfile
           push: true
           tags: tsmukesh51/dpl-dockr:${{ github.sha }}
