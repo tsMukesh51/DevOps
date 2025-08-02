@@ -19,4 +19,6 @@ jobs:
           context: ./dpl-dockr
           file: ./dpl-dockr/dockerfile/http-server.dockerfile
           push: true
-          tags: tsmukesh51/dpl-dockr:${{ github.sha }}
+          tags: tsmukesh51/dpl-dockr-http:${{ github.sha }},tsmukesh51/dpl-dockr-http:latest
+      - name: Deploy on VM
+        run: 'echo "hello world"'

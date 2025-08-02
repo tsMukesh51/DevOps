@@ -1,5 +1,5 @@
 -- CreateTable
-CREATE TABLE "dpldoc"."User" (
+CREATE TABLE "public"."User" (
     "id" SERIAL NOT NULL,
     "username" TEXT NOT NULL,
     "password" TEXT NOT NULL,
@@ -8,7 +8,7 @@ CREATE TABLE "dpldoc"."User" (
 );
 
 -- CreateTable
-CREATE TABLE "dpldoc"."Todo" (
+CREATE TABLE "public"."Todo" (
     "id" SERIAL NOT NULL,
     "name" TEXT NOT NULL,
     "done" BOOLEAN NOT NULL DEFAULT false,
@@ -18,7 +18,7 @@ CREATE TABLE "dpldoc"."Todo" (
 );
 
 -- CreateIndex
-CREATE UNIQUE INDEX "User_username_key" ON "dpldoc"."User"("username");
+CREATE UNIQUE INDEX "User_username_key" ON "public"."User"("username");
 
 -- AddForeignKey
-ALTER TABLE "dpldoc"."Todo" ADD CONSTRAINT "Todo_userId_fkey" FOREIGN KEY ("userId") REFERENCES "dpldoc"."User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "public"."Todo" ADD CONSTRAINT "Todo_userId_fkey" FOREIGN KEY ("userId") REFERENCES "public"."User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

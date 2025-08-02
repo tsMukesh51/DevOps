@@ -37,5 +37,20 @@ app.post("/user", (req, res) => {
     });
 })
 
-app.listen(3000);
-console.log(`http listening at 3000`);
+const server = app.listen(3000, () => console.log(`http listening at 3000`));
+
+
+process.on('SIGTERM', () => {
+  console.log('SIGTERM received');
+  server.close(() => {
+    console.log('shut down gracefully')
+    process.exit(0)
+  })
+});
+process.on('SIGINT', () => {
+  console.log('SIGINT received');
+  server.close(() => {
+    console.log('shut down gracefully')
+    process.exit(0)
+  })
+});
