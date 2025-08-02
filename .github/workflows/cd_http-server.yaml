@@ -38,7 +38,8 @@ jobs:
           echo "Container Stopped"
           docker stop tsmukesh51/dpl-dockr-http || true
           echo "Container Removed"
-          docker rm tsmukesh51/dpl-dockr-http || true
+          docker stop $(docker ps | grep "tsmukesh51/dpl-dockr-http" | awk '{ print $1 }') || true
+          docker rm $(docker ps -a -q)
           echo "Running New Container ${{ secrets.NT_DATABASE_URL }}"
-          docker run -e DATABASE_URL="${{ secrets.NT_DATABASE_URL }}" -p 3000:3000 -d --name tsmukesh51-dpl-dockr-http:${{ github.sha }} || { echo "Run failed"; exit 1; }
+          docker run -e DATABASE_URL="${{ secrets.NT_DATABASE_URL }}" -p 3000:3000 -d tsmukesh51/dpl-dockr-http:${{ github.sha }} || { echo "Run failed"; exit 1; }
           EOF
