@@ -36,5 +36,5 @@ jobs:
           docker pull tsmukesh51/dpl-dockr-http:${{ github.sha }} || { echo "Pull failed"; exit 1; }
           docker stop tsmukesh51/dpl-dockr-http || true
           docker rm tsmukesh51/dpl-dockr-http || true
-          docker -e DATABASE_URL="${{ NT_DATABASE_URL }}" -p 3000:3000 -d --name tsmukesh51-dpl-dockr-http:${{ github.sha }} || { echo "Run failed"; exit 1; }
+          docker -e DATABASE_URL="${{ secrets.NT_DATABASE_URL }}" -p 3000:3000 -d --name tsmukesh51-dpl-dockr-http:${{ github.sha }} || { echo "Run failed"; exit 1; }
           EOF
