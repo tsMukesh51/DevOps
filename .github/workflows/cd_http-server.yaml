@@ -32,7 +32,7 @@ jobs:
           echo "${{ vars.VULTR_MYTRYING_FINGERPRINT }}" &> ~/.ssh/known_hosts
           echo "${{ secrets.SDWMUKESH_SSH_PRIVKEY }}" &> ~/.ssh/ssh_key
           chmod 600 ~/.ssh/ssh_key
-          ssh -i ~/.ssh/ssh_key -6 root@${{ vars.VULTR_MYTRYING_IPADD }} << EOF
+          ssh -i ~/.ssh/ssh_key root@${{ vars.VULTR_MYTRYING_IPADD }} << EOF
           docker pull tsmukesh51/dpl-dockr-http:${{ github.sha }} || { echo "Pull failed"; exit 1; }
           docker stop tsmukesh51/dpl-dockr-http || true
           docker rm tsmukesh51/dpl-dockr-http || true
