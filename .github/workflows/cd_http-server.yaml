@@ -33,8 +33,12 @@ jobs:
           echo "${{ secrets.SDWMUKESH_SSH_PRIVKEY }}" &> ~/.ssh/ssh_key
           chmod 600 ~/.ssh/ssh_key
           ssh -i ~/.ssh/ssh_key root@${{ vars.VULTR_MYTRYING_IPADD }} << EOF
+          echo "Pulling image"
           docker pull tsmukesh51/dpl-dockr-http:${{ github.sha }} || { echo "Pull failed"; exit 1; }
+          echo "Container Stopped"
           docker stop tsmukesh51/dpl-dockr-http || true
+          echo "Container Removed"
           docker rm tsmukesh51/dpl-dockr-http || true
+          echo "Running New Container ${{ secrets.NT_DATABASE_URL }}"
           docker run -e DATABASE_URL="${{ secrets.NT_DATABASE_URL }}" -p 3000:3000 -d --name tsmukesh51-dpl-dockr-http:${{ github.sha }} || { echo "Run failed"; exit 1; }
           EOF
