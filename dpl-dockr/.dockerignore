@@ -1,2 +1,3 @@
 node_modules
 packages/db/generated
+.env
