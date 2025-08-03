@@ -20,4 +20,4 @@ RUN bun install
 COPY ./apps/http-server/ ./apps/http-server/
 
 
-CMD [ "bun", "run", "./apps/http-server/index.ts" ]
+CMD [ "bun", "run", "start-http-server" ]

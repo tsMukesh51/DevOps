@@ -20,4 +20,4 @@ RUN bun install
 COPY ./apps/ws-server/ ./apps/ws-server/
 
 
-CMD [ "bun", "run", "./apps/ws-server/index.ts" ]
+CMD [ "bun", "run", "start-ws-server" ]
