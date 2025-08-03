@@ -2,3 +2,5 @@
 packages/db/generated/
 **/*.env
 **/.git
+**/.next
+**/.turbo
