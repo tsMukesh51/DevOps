@@ -36,7 +36,7 @@ jobs:
       - name: Deploy on VM
         run: |
           mkdir -p ~/.ssh
-          ssh-keyscan "${{ vars.VULTR_MYTRYING_FINGERPRINT }}" &> ~/.ssh/known_hosts
+          echo "${{ vars.VULTR_MYTRYING_FINGERPRINT }}" &> ~/.ssh/known_hosts
           echo "${{ secrets.SDWMUKESH_SSH_PRIVKEY }}" &> ~/.ssh/ssh_key
           chmod 600 ~/.ssh/ssh_key
           ssh -i ~/.ssh/ssh_key root@${{ vars.VULTR_MYTRYING_IPADD }} << EOF
