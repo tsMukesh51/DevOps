@@ -27,7 +27,7 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           context: ./dpl-dockr
-          file: ./dpl-dockr/dockerfile/web.dockerfile
+          file: ./dpl-dockr/dockerfile/ws-server.dockerfile
           push: true
           cache-from: type=registry,ref=tsmukesh51/dpl-dockr-ws:latest
           tags: tsmukesh51/dpl-dockr-ws:${{ github.sha }},tsmukesh51/dpl-dockr-ws:latest

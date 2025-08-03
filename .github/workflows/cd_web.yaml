@@ -32,8 +32,7 @@ jobs:
           cache-from: type=registry,ref=tsmukesh51/dpl-dockr-web:latest
           tags: tsmukesh51/dpl-dockr-web:${{ github.sha }},tsmukesh51/dpl-dockr-web:latest
           cache-to: type=gha,mode=max
-          build-args: |
-            DATABASE_URL="${{ secrets.NT_DATABASE_URL }}"
+          secrets: DATABASE_URL="${{ secrets.NT_DATABASE_URL }}"
       - name: Deploy on VM
         run: |
           mkdir -p ~/.ssh

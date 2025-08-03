@@ -14,13 +14,11 @@ RUN bun install
 COPY ./packages ./packages
 RUN cd packages/db && bunx prisma generate
 
-ARG DATABASE_URL
-
 COPY ./apps/web/package.json ./apps/web/package.json
 RUN bun install
 
 COPY ./apps/web/ ./apps/web/
-RUN cd ./apps/web && export DATABASE_URL=${DATABASE_URL} && bun run build
+RUN --mount=type=secret,id=DATABASE_URL,env=DATABASE_URL cd ./apps/web && bun run build
 
 
 CMD [ "bun", "run", "start-web" ]
