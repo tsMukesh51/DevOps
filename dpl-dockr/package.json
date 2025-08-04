@@ -9,7 +9,7 @@
     "check-types": "turbo run check-types",
     "start-web": "cd ./apps/web && bun run start",
     "start-http-server": "cd ./apps/http-server && bun run start",
-    "start-ws-server": "cd ./apps/web-server && bun run start"
+    "start-ws-server": "cd ./apps/ws-server && bun run start"
   },
   "devDependencies": {
     "prettier": "^3.6.2",
