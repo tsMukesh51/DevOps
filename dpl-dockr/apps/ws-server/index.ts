@@ -19,7 +19,7 @@ Bun.serve({
         else
           ws.send(JSON.stringify(user));
       } else {
-        ws.send("Hi, what do you want?");
+        ws.send("Hi, what do you want?\nSee User List at: http://dpl-dockr.tsm51.dev\nCreate user by post at: http://http.dpl-dockr.tsm51.dev");
       }
     },
   },

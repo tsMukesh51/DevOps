@@ -37,6 +37,10 @@ app.post("/user", (req, res) => {
     });
 })
 
+app.get("/", (req, res) => {
+  res.send("<p>See User List at: http://dpl-dockr.tsm51.dev</p><p>Create user by post at: http://http.dpl-dockr.tsm51.dev</p>");
+})
+
 const server = app.listen(3000, () => console.log(`http listening at 3000`));
 
 

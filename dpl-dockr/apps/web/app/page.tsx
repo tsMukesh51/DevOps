@@ -7,7 +7,13 @@ export default async function Home() {
     <div className={styles.page}>
       <main className={styles.main}>
         <p>
-          {JSON.stringify(usersList)};
+          {usersList.map((u) => {
+            return <div style={{ marginBottom: "10px" }}>
+              <p>{u.id}</p>
+              <p>{u.username}</p>
+              <p>{u.password}</p>
+            </div>
+          })}
         </p>
       </main>
     </div>
