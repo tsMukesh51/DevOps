@@ -44,10 +44,11 @@ jobs:
           echo "Pulling image"
           docker pull tsmukesh51/dpl-dockr-web:${{ github.sha }} || { echo "Pull failed"; exit 1; }
           echo "Container Stopped"
-          docker stop tsmukesh51/dpl-dockr-web || true
-          echo "Container Removed"
           docker stop $(docker ps | grep "tsmukesh51/dpl-dockr-web" | awk '{ print $1 }') || true
+          echo "Container Removed"
           docker rm $(docker ps -a | grep "tsmukesh51/dpl-dockr-web" | awk '{ print $1 }') || true
+          echo "Image Removing"
+          docker image prune -af
           echo "Running New Container"
           docker run -e DATABASE_URL="${{ secrets.NT_DATABASE_URL }}" -p 4200:4200 -d tsmukesh51/dpl-dockr-web:${{ github.sha }} || { echo "Run failed"; exit 1; }
           EOF

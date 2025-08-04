@@ -46,6 +46,8 @@ jobs:
           docker stop $(docker ps | grep "tsmukesh51/dpl-dockr-http" | awk '{ print $1 }') || true
           echo "Container Removing"
           docker rm $(docker ps -a | grep "tsmukesh51/dpl-dockr-http" | awk '{ print $1 }') || true
+          echo "Image Removing"
+          docker image prune -af
           echo "Running New Container"
           docker run -e DATABASE_URL="${{ secrets.NT_DATABASE_URL }}" -p 3000:3000 -d tsmukesh51/dpl-dockr-http:${{ github.sha }} || { echo "Run failed"; exit 1; }
           EOF

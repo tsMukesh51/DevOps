@@ -33,8 +33,6 @@ jobs:
           cache-from: type=registry,ref=tsmukesh51/dpl-dockr-ws:latest
           tags: tsmukesh51/dpl-dockr-ws:${{ github.sha }},tsmukesh51/dpl-dockr-ws:latest
           cache-to: type=gha,mode=max
-          build-args: |
-            DATABASE_URL="${{ secrets.NT_DATABASE_URL }}"
       - name: Deploy on VM
         run: |
           mkdir -p ~/.ssh
@@ -45,10 +43,11 @@ jobs:
           echo "Pulling image"
           docker pull tsmukesh51/dpl-dockr-ws:${{ github.sha }} || { echo "Pull failed"; exit 1; }
           echo "Container Stopped"
-          docker stop tsmukesh51/dpl-dockr-ws || true
-          echo "Container Removed"
           docker stop $(docker ps | grep "tsmukesh51/dpl-dockr-ws" | awk '{ print $1 }') || true
+          echo "Container Removed"
           docker rm $(docker ps -a | grep "tsmukesh51/dpl-dockr-ws" | awk '{ print $1 }') || true
+          echo "Image Removing"
+          docker image prune -af
           echo "Running New Container"
           docker run -e DATABASE_URL="${{ secrets.NT_DATABASE_URL }}" -p 8080:8080 -d tsmukesh51/dpl-dockr-ws:${{ github.sha }} || { echo "Run failed"; exit 1; }
           EOF
