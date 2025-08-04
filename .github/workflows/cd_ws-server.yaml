@@ -49,6 +49,6 @@ jobs:
           echo "Running New Container"
           docker run -e DATABASE_URL="${{ secrets.NT_DATABASE_URL }}" -p 8080:8080 -d tsmukesh51/dpl-dockr-ws:${{ github.sha }} || { echo "Run failed"; exit 1; }
           echo "Image Removing"
-          runningImages=$(docker ps --format {{.Image}})
-          docker rmi $(docker images --format "{{.ID}} {{.Repository}}:{{.Tag}}" | grep -v "$runningImages" | grep "tsmukesh51/dpl-dockr-ws" | awk '{ print $2 }')
+          runningWsImages=$(docker ps --format {{.Image}})
+          docker rmi $(docker images --format "{{.ID}} {{.Repository}}:{{.Tag}}" | grep -v "$runningWsImages" | grep "tsmukesh51/dpl-dockr-ws" | awk '{ print $2 }') || true
           EOF

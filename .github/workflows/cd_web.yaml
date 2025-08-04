@@ -50,6 +50,6 @@ jobs:
           echo "Running New Container"
           docker run -e DATABASE_URL="${{ secrets.NT_DATABASE_URL }}" -p 4200:4200 -d tsmukesh51/dpl-dockr-web:${{ github.sha }} || { echo "Run failed"; exit 1; }
           echo "Image Removing"
-          runningImages=$(docker ps --format {{.Image}})
-          docker rmi $(docker images --format "{{.ID}} {{.Repository}}:{{.Tag}}" | grep -v "$runningImages" | grep "tsmukesh51/dpl-dockr-web" | awk '{ print $2 }')
+          runningWebImages=$(docker ps --format {{.Image}})
+          docker rmi $(docker images --format "{{.ID}} {{.Repository}}:{{.Tag}}" | grep -v "$runningWebImages" | grep "tsmukesh51/dpl-dockr-web" | awk '{ print $2 }') || true
           EOF
