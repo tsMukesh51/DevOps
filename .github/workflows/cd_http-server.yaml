@@ -41,10 +41,9 @@ jobs:
           ssh -i ~/.ssh/ssh_key root@${{ vars.VULTR_MYTRYING_IPADD }} << EOF
           echo "Pulling image"
           docker pull tsmukesh51/dpl-dockr-http:${{ github.sha }} || { echo "Pull failed"; exit 1; }
-          echo "Container Stopped"
-          docker stop tsmukesh51/dpl-dockr-http || true
-          echo "Container Removed"
+          echo "Container Stopping"
           docker stop $(docker ps | grep "tsmukesh51/dpl-dockr-http" | awk '{ print $1 }') || true
+          echo "Container Removing"
           docker rm $(docker ps -a | grep "tsmukesh51/dpl-dockr-http" | awk '{ print $1 }') || true
           echo "Running New Container"
           docker run -e DATABASE_URL="${{ secrets.NT_DATABASE_URL }}" -p 3000:3000 -d tsmukesh51/dpl-dockr-http:${{ github.sha }} || { echo "Run failed"; exit 1; }

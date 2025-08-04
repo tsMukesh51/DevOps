@@ -48,5 +48,5 @@ jobs:
           docker stop $(docker ps | grep "tsmukesh51/dpl-dockr-web" | awk '{ print $1 }') || true
           docker rm $(docker ps -a | grep "tsmukesh51/dpl-dockr-web" | awk '{ print $1 }') || true
           echo "Running New Container"
-          docker run -e DATABASE_URL="${{ secrets.NT_DATABASE_URL }}" -p 3000:3000 -d tsmukesh51/dpl-dockr-web:${{ github.sha }} || { echo "Run failed"; exit 1; }
+          docker run -e DATABASE_URL="${{ secrets.NT_DATABASE_URL }}" -p 4200:4200 -d tsmukesh51/dpl-dockr-web:${{ github.sha }} || { echo "Run failed"; exit 1; }
           EOF
