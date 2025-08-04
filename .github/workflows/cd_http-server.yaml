@@ -3,6 +3,7 @@ on:
   push:
     branches: [master]
     paths:
+      - ".github/workflows/cd_http-server.yaml"
       - "dpl-dockr/**"
       - "!dpl-dockr/apps/web/**"
       - "!dpl-dockr/apps/ws-server/**"
