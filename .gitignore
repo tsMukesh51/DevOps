@@ -154,7 +154,7 @@ dist/
 
 # deps
 .wrangler
-wrangler.jsonc
+**/wrangler.jsonc
 
 # misc
 .DS_Store
