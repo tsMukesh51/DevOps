@@ -1,0 +1,73 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum WebsiteMonitoringStatus {
+  active
+  inactive
+}
+
+enum WebsiteResponseStatus {
+  Up
+  Down
+  Unknown
+}
+
+enum Regions {
+  NorthAmerica
+  SouthAmerica
+  Europe
+  Africa
+  CentralAsia
+  IndianSubcontinent
+  EastAsia
+}
+
+model User {
+  id        Int       @id @default(autoincrement())
+  name      String
+  email     String    @unique
+  password  String
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @default(now())
+  websites  Website[]
+}
+
+model Website {
+  id                Int                     @id @default(autoincrement())
+  url               String
+  userId            Int
+  user              User                    @relation(fields: [userId], references: [id])
+  websiteMonitoring WebsiteMonitoringStatus
+  websiteConfigs    WebsiteConfig[]
+  createdAt         DateTime                @default(now())
+  updateAt          DateTime                @default(now())
+}
+
+model WebsiteConfig {
+  id                  Int                 @id @default(autoincrement())
+  region              Regions
+  pullFrequency       Int
+  websiteId           Int
+  website             Website             @relation(fields: [websiteId], references: [id])
+  websiteTickSerieses WebsiteTickSeries[]
+  createdAt           DateTime            @default(now())
+  updatedAt           DateTime            @default(now())
+}
+
+model WebsiteTickSeries {
+  id            Int                   @id @default(autoincrement())
+  responeStatus WebsiteResponseStatus
+  responseTime  Int
+  polledAt      DateTime
+  websiteConfig Int
+  WebsiteConfig WebsiteConfig         @relation(fields: [websiteConfig], references: [id])
+  createdAt     DateTime              @default(now())
+  updatedAt     DateTime              @default(now())
+}
